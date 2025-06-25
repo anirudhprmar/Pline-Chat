@@ -4,7 +4,6 @@ import type React from "react"
 
 import { useRef, useEffect } from "react"
 import { Button } from "@/components/ui/Button"
-// import { Input } from "@/components/ui/input"
 import { Send, PlusCircle } from "lucide-react"
 import ChatMessage from "@/components/ChatMessage"
 import type { Message } from "ai"
@@ -13,9 +12,10 @@ interface ChatAreaProps {
   messages: Message[]
   input: string
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void
-  isLoading: boolean
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void,
   createNewChat: () => void
+  status: string
+  stop: () => void
 }
 
 export default function ChatArea({
@@ -23,8 +23,10 @@ export default function ChatArea({
   input,
   handleInputChange,
   handleSubmit,
-  isLoading,
+  status,
+  stop,
   createNewChat,
+  // isLoading,
 }: ChatAreaProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
@@ -37,6 +39,7 @@ export default function ChatArea({
 
   return (
     <div className="flex-1 flex flex-col h-full">
+    
       {/* Messages area */}
       <div className="flex-1 overflow-y-auto p-4">
         {messages.length === 0 ? (
@@ -55,13 +58,13 @@ export default function ChatArea({
             {messages.map((message) => (
               <ChatMessage key={message.id} message={message} />
             ))}
-            {isLoading && (
+            { !messages && (
               <div className="flex items-center space-x-2">
                 <div className="h-2 w-2 rounded-full bg-muted-foreground animate-bounce" />
                 <div className="h-2 w-2 rounded-full bg-muted-foreground animate-bounce delay-100" />
                 <div className="h-2 w-2 rounded-full bg-muted-foreground animate-bounce delay-200" />
               </div>
-            )}
+            )} 
             <div ref={messagesEndRef} />
           </div>
         )}
@@ -75,11 +78,21 @@ export default function ChatArea({
             onChange={handleInputChange}
             placeholder="Type your message..."
             className="flex-1"
-            disabled={isLoading}
           />
-          <Button type="submit" size="small" disabled={isLoading || !input.trim()}>
+          
+          <Button type="submit" size="small" disabled={!input.trim()}>
             <Send className="h-4 w-4" />
           </Button>
+
+           {(status === 'submitted' || status === 'streaming') && (
+              <div >
+                {status === 'submitted' ? 'Thinking...' : 'Streaming...'}
+                <button type="button" onClick={() => stop()} className="text-gray-50 ">
+                  Stop
+                </button>
+              </div>
+            )}
+            
         </form>
       </div>
     </div>

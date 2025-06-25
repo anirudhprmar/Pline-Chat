@@ -2,8 +2,7 @@
 
 import type { Message } from "ai"
 import { cn } from "@/lib/utils"
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import ReactMarkdown, { type Components } from "react-markdown"
+import ReactMarkdown from "react-markdown"
 
 interface CodeProps {
   inline?: boolean;
@@ -23,7 +22,7 @@ const Avatar = ({ letter }: { letter: string }) => (
 )
 
 const CodeBlock = ({ className, children, ...props }: any) => {
-  const match = /language-(\w+)/.exec(className || "")
+  const match = /language-(\w+)/.exec(className || "") //? what is this?
   return (
     <pre className={cn(
       "p-4 rounded-lg bg-slate-800 overflow-x-auto",

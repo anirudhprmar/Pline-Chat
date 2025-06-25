@@ -9,10 +9,6 @@ interface SidebarProps {
   createNewChat: () => void;
   switchChat: (chatId: string) => void;
   deleteChat: (chatId: string) => void;
-  isOpen: boolean;
-  setIsOpen:(isOpen:boolean) => void
-  onClose?: () => void;
-  isMobile?: boolean;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -20,23 +16,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
   currentChatId,
   createNewChat,
   switchChat,
-  deleteChat,
-  setIsOpen,
-  isOpen = true,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onClose,
-  isMobile = false,
+  deleteChat
 }) => {
   return (
     <>
-      {/* Overlay for mobile */}
-     {isOpen && isMobile && (
-        <div 
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity lg:hidden"
-          onClick={() => setIsOpen(false)}  // Update this line
-        />
-      )}
-
+     
       {/* Sidebar */}
       <aside 
         className={`
@@ -45,7 +29,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           transform transition-transform duration-300 ease-in-out
           bg-white dark:bg-gray-800
           border-r border-gray-200 dark:border-gray-700
-          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+          translate-x-0 md:-translate-x-full
           lg:translate-x-0 lg:static
         `}
       >
@@ -55,25 +39,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
               Chats
             </h2>
-            {isMobile && (
-              <button
-                onClick={() => setIsOpen(false)}  // Update this line
-                className="p-2 rounded-md lg:hidden hover:bg-gray-100 dark:hover:bg-gray-700"
-                aria-label="Close sidebar"
-              >
-                <svg
-                  className="w-6 h-6 text-gray-600 dark:text-gray-400"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            )}
+           
           </div>
 
           {/* New Chat Button */}
@@ -109,7 +75,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 
                 <button
                   onClick={(e) => {
-                    e.stopPropagation();
+                    e.preventDefault();
                     deleteChat(chat.id);
                   }}
                   className="opacity-0 group-hover:opacity-100 p-1 hover:bg-gray-200 dark:hover:bg-gray-600 rounded"
