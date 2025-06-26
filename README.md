@@ -6,7 +6,7 @@
 - [X] Can send a message and get AI response
 - [X] set up local database (Dexie)
 - [ ] Messages save to local database 
-- [ ] whole navigation on the client side  
+- [X] whole navigation on the client side  
 - [ ] Messages persist between page refreshes (data persistance and sync)
 - [ ] Overall Ui of the app 
 
@@ -18,3 +18,4 @@
  
  
 
+ 

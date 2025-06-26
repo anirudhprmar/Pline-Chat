@@ -25,8 +25,8 @@ const db = new Dexie('localDb') as Dexie & {
 
 // Schema declaration:
 db.version(1).stores({
-  chats: '++id, title, updatedAt',
-  messages: '++id, chatId, updatedAt'
+  chats: 'id, title, updatedAt', 
+  messages: 'id, chatId, updatedAt'
 });
 
 export type { Chat, Message };

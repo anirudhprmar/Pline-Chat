@@ -19,13 +19,20 @@ const getChats = async () => {
 //     return await db.chats.get(id);
 // }
 
-const updateChat = async (id: string, title:string) => {
-    return await db.chats.update(id,{title:title,updatedAt: new Date().toISOString()});
+const updateChatTitle = async (id: string, title:string) => {
+    return await db.chats.update(id,{title,updatedAt: new Date().toISOString()});
 }
 
 const deleteChat = async (id: string) => {
-    await db.chats.delete(id);
-    await db.messages.where('chatId').equals(id).delete();
+    const chat = await db.chats.get(id);
+    if (!chat) {
+        throw new Error(`Chat with id ${id} not found`);
+    }
+    return await db.transaction('rw',[db.chats, db.messages], async () => {
+        await db.messages.where('chatId').equals(id).delete();
+        return await db.chats.delete(id);
+
+    })
 }
 
 const getMessagesByChatId = async (chatId: string) => {
@@ -49,4 +56,4 @@ const updateMessage = async (id: string, content: string) => {
     return await db.messages.update(id, { content, updatedAt: new Date().toISOString() });
 }   
 
-export {createChat, getChats, updateChat, deleteChat, getMessagesByChatId, addMessage, updateMessage};
+export {createChat, getChats, updateChatTitle, deleteChat, getMessagesByChatId, addMessage, updateMessage};
