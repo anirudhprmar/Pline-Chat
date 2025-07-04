@@ -1,11 +1,12 @@
+import { UIMessage } from 'ai';
 import {db} from './db';
 
 const createChat = async (title: string) => {
     const chat = {
         id: crypto.randomUUID(),
         title,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
     };
     await db.chats.add(chat);
     return chat;
@@ -15,12 +16,8 @@ const getChats = async () => {
     return await db.chats.toArray();
 }
 
-// const getChatById = async (id: string) => {
-//     return await db.chats.get(id);
-// }
-
 const updateChatTitle = async (id: string, title:string) => {
-    return await db.chats.update(id,{title,updatedAt: new Date().toISOString()});
+    return await db.chats.update(id,{title,updatedAt: new Date()});
 }
 
 const deleteChat = async (id: string) => {
@@ -36,24 +33,20 @@ const deleteChat = async (id: string) => {
 }
 
 const getMessagesByChatId = async (chatId: string) => {
+    if (!chatId) return []; // Return empty array if chatId is invalid
     return await db.messages.where('chatId').equals(chatId).toArray();
 }
 
-const addMessage = async (chatId: string, role: 'user' | 'ai', content: string) => {
-    const message = {
-        id: crypto.randomUUID(),
+const saveMessage = async (chatId: string, message: UIMessage) => {
+    await db.messages.add({
+        id: message.id,
         chatId,
-        role,
-        content,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-    };
-    await db.messages.add(message);
+        createdAt: new Date(),
+        parts: message.parts,
+        role: message.role
+    });
     return message;
 }
 
-const updateMessage = async (id: string, content: string) => {
-    return await db.messages.update(id, { content, updatedAt: new Date().toISOString() });
-}   
 
-export {createChat, getChats, updateChatTitle, deleteChat, getMessagesByChatId, addMessage, updateMessage};
+export {createChat, getChats, deleteChat,updateChatTitle, getMessagesByChatId, saveMessage};

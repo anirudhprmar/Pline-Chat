@@ -2,7 +2,7 @@ import { BrowserRouter,Route,Routes } from "react-router";
 import Index from "./Index";
 import ChatLayout from "./ChatLayout";
 import Home from "./Home";
-import Chat from "./Chat";
+import ChatArea from "./ChatArea";
 
 export default function App() {
     return(
@@ -10,13 +10,13 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Index/>} />
 
-                <Route path="/chat" element={<ChatLayout/>}>
+                <Route path="chat" element={<ChatLayout/>}>
                     <Route index element={<Home/>} />
-                    <Route path="/:id" element={<Chat/>} />
+                    <Route path=":id" element={<ChatArea/>} />
                 </Route>
                 
                  <Route path="*" element={<p> Not found </p>} />
             </Routes>
         </BrowserRouter>
     )
-}
+}   

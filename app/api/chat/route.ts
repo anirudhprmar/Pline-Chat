@@ -13,6 +13,8 @@ const google = createGoogleGenerativeAI({
 
 export async function POST(req: NextRequest) {
   const { messages } = await req.json();
+    console.log("Received messages:", JSON.stringify(messages, null, 2));
+
 
   const result = streamText({
     model: google('gemini-2.5-flash-preview-04-17'),

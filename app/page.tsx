@@ -1,6 +1,7 @@
 "use client"
-import ChatInterface from "@/components/ChatInterface"
+
+import App from "@/frontend/App"
 
 export default function Home() {
-  return <ChatInterface />
+  return <App/>
 }
