@@ -1,10 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client"
 
 import { createChat, getChats, saveMessage, updateChatTitle } from "@/frontend/dexie/queries";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import {v4 as uuidv4} from 'uuid'
 import { UIMessage } from "ai";
+import { Button } from "./ui/button";
 // import {Send} from 'lucide-react'
 
 interface ChatInputProps {
@@ -84,9 +85,9 @@ function ChatInput({
         placeholder="Type your question"
         className="flex-1 p-2"
         />
-        <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">
+        <Button variant={'default'} size={'icon'} type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">
         Send
-        </button>
+        </Button>
     </form>
     {/* <form onSubmit={() =>(
         handleInputSubmit

@@ -1,6 +1,8 @@
+"use client"
 import { getChats } from "@/frontend/dexie/queries";
 import { useLiveQuery } from "dexie-react-hooks";
 import { useNavigate } from "react-router";
+import ThemeSwitch from "./ThemeSwitch";
 
 function Sidebar() {
 
@@ -9,17 +11,23 @@ function Sidebar() {
   const navigate = useNavigate()
   return (
     <div>
-       { chats?.map(chat => {
-            return (
-              <div key={chat.id} className="p-2 hover:bg-gray-800 cursor-pointer">
-                <button onClick={(e)=>{
-                  e.preventDefault();
-                  navigate(`/chat/${chat.id}`);
-                }}>{chat.title}</button>
-              </div>
-            )
-          })
-        }
+      <div className="overflow-y-scroll">
+        { chats?.map(chat => {
+              return (
+                <div key={chat.id} className="p-2 hover:bg-gray-800 cursor-pointer">
+                  <button onClick={(e)=>{
+                    e.preventDefault();
+                    navigate(`/chat/${chat.id}`);
+                  }}>{chat.title}</button>
+                </div>
+              )
+            })
+          }
+      </div>
+      
+      <div className="rounded-full border border-gray-50 w-fit p-1">
+        <ThemeSwitch/>
+      </div>
     </div>
   )
 }

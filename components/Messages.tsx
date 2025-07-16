@@ -1,3 +1,4 @@
+"use client"
 import { UIMessage } from "ai"
 import MarkdownMsg from "./MarkdownMsg"
 

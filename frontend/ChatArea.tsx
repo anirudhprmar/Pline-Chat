@@ -1,3 +1,4 @@
+"use client"
 import Chat from "@/components/Chat";
 import { useParams } from "react-router";
 import {useLiveQuery} from 'dexie-react-hooks'
@@ -10,9 +11,6 @@ export default function ChatArea() {
     const { id } = useParams();
 
    const messages = useLiveQuery(() => getMessagesByChatId(id as string), [id]);
-
-    // messages are not persisting, meaning onclicking on different chat and coming back to the same chat, messages are not persisting
-    
 
     const convertToUIMessages = (messages?: DBMessage[]) => {
         return messages?.map(

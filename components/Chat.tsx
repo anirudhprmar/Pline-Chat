@@ -1,3 +1,4 @@
+"use client"
 import Messages from "./Messages";
 import ChatInput from "./ChatInput";
 import { UIMessage } from "ai";

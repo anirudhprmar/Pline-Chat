@@ -1,3 +1,4 @@
+"use client"
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import ReactMarkdown from "react-markdown" // markdown
 import { UIMessage } from "ai"
