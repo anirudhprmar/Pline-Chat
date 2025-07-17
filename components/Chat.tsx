@@ -30,7 +30,7 @@ export default function Chat({chatId,initialMessages}: chatProps) {
   })
   
   return (
-    <main>
+    <main className="mx-auto px-5 min-h-screen pt-10">
 
       <Messages
       messages={messages}

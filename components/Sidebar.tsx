@@ -11,14 +11,19 @@ function Sidebar() {
   const navigate = useNavigate()
   return (
     <div>
-      <div className="overflow-y-scroll">
+      <div>
+          <h1 className="text-2xl font-bold text-gray-950 dark:text-white">Chat</h1> 
+      </div>
+      <div className="overflow-y-hidden">
         { chats?.map(chat => {
               return (
-                <div key={chat.id} className="p-2 hover:bg-gray-800 cursor-pointer">
+                <div key={chat.id} className="p-2 hover:bg-gray-300 dark:hover:bg-gray-800 cursor-pointer">
                   <button onClick={(e)=>{
                     e.preventDefault();
                     navigate(`/chat/${chat.id}`);
-                  }}>{chat.title}</button>
+                  }}
+                  className="text-gray-950 dark:text-gray-50"
+                  >{chat.title}</button>
                 </div>
               )
             })

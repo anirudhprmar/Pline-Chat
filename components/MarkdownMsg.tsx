@@ -17,7 +17,7 @@ interface CodeProps {
 
 
 const Avatar = ({ letter }: { letter: string }) => (
-<div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 text-white font-medium">
+<div className="flex items-center justify-center  w-7 h-7 rounded-full bg-[#6e11b0] text-white font-medium">
   {letter}
 </div>
 )
@@ -72,28 +72,27 @@ function MarkdownMsg({  message,  status, reload, edit }: {
   return (
     <div 
       className={cn(
-        "flex gap-3 items-start py-2",
-        isUser ? "justify-end" : "justify-start"
+        "flex gap-3 justify-start py-2 px-10 mx-50 "
       )}
     >
-      {!isUser && <Avatar letter="AI" />}
-
+      {/* {!isUser && <Avatar letter="AI" />} */}
+      <div className={` flex gap-3 items-center justify-center rounded-lg px-4 py-2.5 max-w-full   ${isUser ? 'bg-[#e9d4ff]' :  ''}  `}
+      
+      >
+      {isUser && <Avatar letter="U" />}
       <div
         className={cn(
-          "rounded-lg px-4 py-2.5 max-w-[85%]",
-          "shadow-sm",
-          isUser 
-            ? "bg-primary text-primary-foreground" 
-            : "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700"
+          "text-primary-foreground"
         )}
       >
         {isUser ? (
-          <p className="whitespace-pre-wrap text-sm">{content}</p>
+          <p className="whitespace-pre-wrap text-sm text-gray-900 ">{content}</p>
         ) : (
           <div className={cn(
             "prose dark:prose-invert prose-sm max-w-none",
             "prose-p:leading-relaxed prose-pre:p-0",
-            "prose-code:before:content-none prose-code:after:content-none"
+            "prose-code:before:content-none prose-code:after:content-none",
+            "text-gray-900 dark:text-gray-50"
           )}>
             <ReactMarkdown
               components={{
@@ -109,7 +108,10 @@ function MarkdownMsg({  message,  status, reload, edit }: {
         )}
       </div>
 
-      {isUser && <Avatar letter="U" />}
+      </div>
+
+
+
     </div>
   )
 }

@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import {v4 as uuidv4} from 'uuid'
 import { UIMessage } from "ai";
 import { Button } from "./ui/button";
+import { Send } from "lucide-react";
+import { Input } from "./ui/input";
 // import {Send} from 'lucide-react'
 
 interface ChatInputProps {
@@ -77,43 +79,19 @@ function ChatInput({
 
     return (
         <div>
-          <form onSubmit={handleSubmit} className="flex space-x-2 max-w-3xl mx-auto">
-        <input
-        type="text"
-        value={input ?? ""}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Type your question"
-        className="flex-1 p-2"
-        />
-        <Button variant={'default'} size={'icon'} type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">
-        Send
-        </Button>
-    </form>
-    {/* <form onSubmit={() =>(
-        handleInputSubmit
-        )} 
-        className="flex space-x-2 max-w-3xl mx-auto">
-          <input
-            value={input}
-            onChange={handleInputChange}
-            placeholder="Type your message..."
-            className="flex-1"
-          />
-          
-          <button type="submit" disabled={status === 'submitted' || status === 'streaming'} className="flex items-center justify-center bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50">
-            <Send className="h-4 w-4" />
-          </button>
+          <form onSubmit={handleSubmit} className="flex space-x-2  mx-auto items-center fixed left-80 right-0  bottom-5 max-w-3xl  p-2 ">
+            <Input
+            type="text"
+            value={input ?? ""}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type your question"
+            className=" p-7  rounded-lg relative "
+            />
 
-           {(status === 'submitted' || status === 'streaming') && (
-              <div >
-                {status === 'submitted' ? 'Thinking...' : 'Streaming...'}
-                <button type="button" onClick={() => stop()} className="text-gray-50 ">
-                  Stop
-                </button>
-              </div>
-            )}
-            
-        </form> */}
+            <Button variant={'outline'} size={'lg'} type="submit" className="p-3 text-lg absolute right-10 bg-[#59168b] text-white hover:text-gray-50 hover:bg-[#6e11b0] rounded-sm cursor-pointer">
+                <Send/>
+            </Button>
+        </form>
         </div>
     )
 }

@@ -15,10 +15,12 @@
 
 
 ## CHAT UI
-- [ ] Overall Ui of the app (dark and light mode, chat area (ai and user messages and their logos), beautiful chat input, sidebar)
+- [ ] beautiful chat input
+- [ ] sidebar
+- [ ] make it all responsive
+- [ ] pick one theme, remove dark mode light mode
 - [ ] auto scroll , font size
-- [ ] stop button next to send button
-- [ ]- Home page , there should be scroll only for the chat titles (chat list basically) not the chat area or home page
+- [X]- Home page , there should be scroll only for the chat titles (chat list basically) not the chat area or home page
 
 
  
