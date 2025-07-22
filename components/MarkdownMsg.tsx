@@ -1,8 +1,9 @@
 "use client"
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import ReactMarkdown from "react-markdown" // markdown
+import ReactMarkdown from "react-markdown" 
 import { UIMessage } from "ai"
 import { cn } from "@/lib/utils"
+import { LoaderPinwheelIcon } from "lucide-react";
 // import remarkMath from 'remark-math'
 // import rehypeKatex from 'rehype-katex'
 // import remarkGfm from 'remark-gfm'
@@ -17,7 +18,7 @@ interface CodeProps {
 
 
 const Avatar = ({ letter }: { letter: string }) => (
-<div className="flex items-center justify-center  w-7 h-7 rounded-full bg-[#6e11b0] text-white font-medium">
+  <div className="flex items-center justify-center  w-7 h-7 rounded-full bg-[#6e11b0] text-white font-medium">
   {letter}
 </div>
 )
@@ -36,11 +37,11 @@ const CodeBlock = ({children,className,...props}:any)=>{
 }
 
 const InlineCode = ({children,className,...props}:any)=>{
-return (
-  <pre
-  className={cn("bg-slate-200 dark:bg-slate-800 rounded px-1.5 py-0.5 text-sm", className)}
-  {...props}
-  >
+  return (
+    <pre
+    className={cn("bg-slate-200 dark:bg-slate-800 rounded px-1.5 py-0.5 text-sm", className)}
+    {...props}
+    >
     {children}
   </pre>
 )
@@ -52,28 +53,36 @@ function MarkdownMsg({  message,  status, reload, edit }: {
   reload?: () => void 
   edit:(messages:UIMessage[]) => void,
 } ) {
-  console.log('message', message)
 
+
+  
   if (status === 'streaming') {
     return (
-      <div key={message.id} className="message">
+      <div key={message.id}>
         <div className="p-1 bg-blue-200 rounded-md text-sm w-2 ">
           {message.role === 'user' ? 'U' : 'AI'}
         </div>
-        <div className="text-gray-500">Loading...</div>
+        <div className="text-gray-500 animate-spin"><LoaderPinwheelIcon/></div>
       </div>
     )
   }
-
- const isUser = message.role === 'user'
-
- const content = Array.isArray(message.parts) ? message.parts.filter(part => part.type === 'text').map(part => part.text).join("\n") : message.content || '';
+  
+  const isUser = message.role === 'user'
+  //  console.log(message) //check the message array
+  //get the array of messages containing all the messages and filter According to date and time (done)
+  
+  //  console.log( JSON.stringify(message))
+  
+    
+  
+  
+  const content = Array.isArray(message.parts) ? message.parts.filter(part => part.type === 'text').map(part => part.text).join("\n") : message.content || '';
   
   return (
     <div 
-      className={cn(
-        "flex gap-3 justify-start py-2 px-10 mx-50 "
-      )}
+    className={cn(
+      "flex gap-3 justify-start py-2 px-10 mx-50  "
+    )}
     >
       {/* {!isUser && <Avatar letter="AI" />} */}
       <div className={` flex gap-3 items-center justify-center rounded-lg px-4 py-2.5 max-w-full   ${isUser ? 'bg-[#e9d4ff]' :  ''}  `}
@@ -92,7 +101,7 @@ function MarkdownMsg({  message,  status, reload, edit }: {
             "prose dark:prose-invert prose-sm max-w-none",
             "prose-p:leading-relaxed prose-pre:p-0",
             "prose-code:before:content-none prose-code:after:content-none",
-            "text-gray-900 dark:text-gray-50"
+            "text-green-900 dark:text-green-200 "
           )}>
             <ReactMarkdown
               components={{
