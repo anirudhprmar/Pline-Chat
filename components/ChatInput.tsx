@@ -71,8 +71,9 @@ function ChatInput({
     });
 
     // Only update title if it's empty
+    if(chats.find(chat => chat.id === chatId && chat.title !== 'New Chat') ) return;
     if (chats.find(chat => chat.id === chatId && chat.title === 'New Chat')) {
-        updateChatTitle(chatId, title);
+        updateChatTitle(chatId, title)
     }
 };
 

@@ -17,7 +17,7 @@ export default function Messages({
     reload
 }: MessagesProps) {
 
-  //array of messages already here : messages
+  //array of messages already here : messages -> store it in a state
 
   //get the date from messages
   function getDateString(date:any){
@@ -25,7 +25,7 @@ export default function Messages({
     return d.toISOString().slice(0,10)
   }
 
-  //group msg with same date
+  //group msg with same date 
   if (!messages) return;
   const grouped = messages.reduce((acc,msg)=>{
     const key = getDateString(msg.createdAt)

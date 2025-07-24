@@ -11,10 +11,10 @@
 - [X] whole navigation on the client side   
 - [X] fix the Error: document is not defined
 - [X] maintain the chats in order (date wise separation and timely chats)
-- [ ] remove loading ... when getting ai response add animation to that (when loading all the prev chats also get into loading state so stop that )
-- [ ] chat delete option
-- [ ] make everything happening in real time (websocket ??)
-- [ ] finally give a way to select other api's too
+- [X] proper loading state for new incoming msgs 
+- [ ] chat delete option 
+- [ ] finally give a way to select other api's too 
+- [ ] make everything happening in real time (websocket ??) 
 
 
 ## CHAT UI

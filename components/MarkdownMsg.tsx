@@ -3,11 +3,9 @@
 import ReactMarkdown from "react-markdown" 
 import { UIMessage } from "ai"
 import { cn } from "@/lib/utils"
-import { LoaderPinwheelIcon } from "lucide-react";
-// import remarkMath from 'remark-math'
-// import rehypeKatex from 'rehype-katex'
-// import remarkGfm from 'remark-gfm'
-// import rehypeHighlight from 'rehype-highlight'
+import { Loader2 } from "lucide-react";
+import { useEffect, useState } from "react";
+
 
 interface CodeProps {
   inline?: boolean;
@@ -36,7 +34,7 @@ const CodeBlock = ({children,className,...props}:any)=>{
   )
 }
 
-const InlineCode = ({children,className,...props}:any)=>{
+const InlineCode = (({children,className,...props}:any)=>{
   return (
     <pre
     className={cn("bg-slate-200 dark:bg-slate-800 rounded px-1.5 py-0.5 text-sm", className)}
@@ -45,7 +43,7 @@ const InlineCode = ({children,className,...props}:any)=>{
     {children}
   </pre>
 )
-}
+})
 
 function MarkdownMsg({  message,  status, reload, edit }: {
   message:UIMessage,
@@ -53,30 +51,20 @@ function MarkdownMsg({  message,  status, reload, edit }: {
   reload?: () => void 
   edit:(messages:UIMessage[]) => void,
 } ) {
-
-
   
-  if (status === 'streaming') {
-    return (
-      <div key={message.id}>
-        <div className="p-1 bg-blue-200 rounded-md text-sm w-2 ">
-          {message.role === 'user' ? 'U' : 'AI'}
-        </div>
-        <div className="text-gray-500 animate-spin"><LoaderPinwheelIcon/></div>
-      </div>
-    )
-  }
-  
-  const isUser = message.role === 'user'
-  //  console.log(message) //check the message array
-  //get the array of messages containing all the messages and filter According to date and time (done)
-  
-  //  console.log( JSON.stringify(message))
+  const [chatMsg,setChatMsg] = useState<any>('')
+      
+    // useEffect(()=>{
+      // setChatMsg((prev: any)=> [...prev, content])
+      
+      // },[message.content,message.parts])
+      
+      const content = Array.isArray(message.parts) ? message.parts.filter(part => part.type === 'text').map(part => part.text).join("\n") : message.content || '';
   
     
-  
-  
-  const content = Array.isArray(message.parts) ? message.parts.filter(part => part.type === 'text').map(part => part.text).join("\n") : message.content || '';
+    const isUser = message.role === 'user'
+    
+    
   
   return (
     <div 
@@ -89,6 +77,7 @@ function MarkdownMsg({  message,  status, reload, edit }: {
       
       >
       {isUser && <Avatar letter="U" />}
+
       <div
         className={cn(
           "text-primary-foreground"
@@ -101,7 +90,8 @@ function MarkdownMsg({  message,  status, reload, edit }: {
             "prose dark:prose-invert prose-sm max-w-none",
             "prose-p:leading-relaxed prose-pre:p-0",
             "prose-code:before:content-none prose-code:after:content-none",
-            "text-green-900 dark:text-green-200 "
+            "text-gray-900 dark:text-gray-200 ",
+            status === 'streaming' ? <div className="'animate-spin'"><Loader2/></div>: null //make it better
           )}>
             <ReactMarkdown
               components={{
