@@ -16,6 +16,12 @@ const getChats = async () => {
     return await db.chats.toArray();
 }
 
+const getChatById = async(id:string)=>{
+    if(!id) return;
+    return await db.chats.get(id)
+}
+
+
 const updateChatTitle = async (id: string, title:string) => {
     return await db.chats.update(id,{title,updatedAt: new Date()});
 }
@@ -49,4 +55,4 @@ const saveMessage = async (chatId: string, message: UIMessage) => {
 }
 
 
-export {createChat, getChats, deleteChat,updateChatTitle, getMessagesByChatId, saveMessage};
+export {createChat, getChats, deleteChat,updateChatTitle, getMessagesByChatId, saveMessage,getChatById};

@@ -3,8 +3,9 @@
 import Messages from "./Messages";
 import ChatInput from "./ChatInput";
 import { UIMessage } from "ai";
-import {saveMessage} from "../frontend/dexie/queries";
+import {getChatById, saveMessage} from "../frontend/dexie/queries";
 import { useChat } from "@ai-sdk/react";
+import { useLiveQuery } from "dexie-react-hooks";
 
 interface chatProps {
   chatId:string
@@ -29,6 +30,8 @@ export default function Chat({chatId,initialMessages}: chatProps) {
         await saveMessage(chatId, aiResponse)
     }
   })
+
+    const chatInfo = useLiveQuery(()=>getChatById(chatId as string),[chatId])
   
   return (
     <main className="mx-auto px-5 min-h-screen pt-10">
@@ -38,6 +41,7 @@ export default function Chat({chatId,initialMessages}: chatProps) {
       setMessages={setMessages}
       status={status}
       reload={reload}
+      chatInfo={chatInfo}
       />
 
       <ChatInput

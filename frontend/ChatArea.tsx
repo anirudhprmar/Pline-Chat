@@ -2,7 +2,7 @@
 import Chat from "@/components/Chat";
 import { useParams } from "react-router";
 import {useLiveQuery} from 'dexie-react-hooks'
-import { getMessagesByChatId } from "./dexie/queries";
+import {  getMessagesByChatId } from "./dexie/queries";
 import { type DBMessage } from "./dexie/db";
 import { UIMessage } from "ai";
 import { useEffect, useState } from "react";
@@ -18,7 +18,8 @@ export default function ChatArea() {
     useEffect(()=>{
       setChatMsgs(messages)
     },[messages,id])
-
+    
+    
 
 
     const convertToUIMessages = (messages?: DBMessage[]) => {
