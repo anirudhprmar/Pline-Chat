@@ -2,8 +2,7 @@
 
 ## TODO
 
-- [X] zustand store of providers for storing client's api's
-- [ ] Provider selector component 
+- [X] Provider selector component 
 - [ ] API Key manager
 - [ ] Unified AI Client (list of all the providers with specific function for operating)
 - [ ] Setting's page
