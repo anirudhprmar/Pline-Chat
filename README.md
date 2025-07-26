@@ -2,10 +2,9 @@
 
 ## TODO
 
-- [X] API Key manager
-- [ ] Unified AI Client (list of all the providers with specific function for operating)
+- [X] Unified AI Client (list of all the providers with specific function for operating)
 - [ ] Setting's page
-- [ ] Update the api/chat to use selected provider
+- [ ] Update the api/chat route, to use selected provider
 
 
 

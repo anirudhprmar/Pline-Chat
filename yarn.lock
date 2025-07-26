@@ -17,6 +17,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ai-sdk/openai-compatible@npm:0.2.16":
+  version: 0.2.16
+  resolution: "@ai-sdk/openai-compatible@npm:0.2.16"
+  dependencies:
+    "@ai-sdk/provider": "npm:1.1.3"
+    "@ai-sdk/provider-utils": "npm:2.2.8"
+  peerDependencies:
+    zod: ^3.0.0
+  checksum: 10c0/03054b7d6960be64cd9788cc7ecde324a6c70b8d51df4c3252deba8f6c5b641fce1058ab89c4793bbb4f2237e4fe09d1f4966205015b75b04bb49931d49a4253
+  languageName: node
+  linkType: hard
+
+"@ai-sdk/openai@npm:^1.3.23":
+  version: 1.3.23
+  resolution: "@ai-sdk/openai@npm:1.3.23"
+  dependencies:
+    "@ai-sdk/provider": "npm:1.1.3"
+    "@ai-sdk/provider-utils": "npm:2.2.8"
+  peerDependencies:
+    zod: ^3.0.0
+  checksum: 10c0/4fefd458488ac9d35bd7a096f738254b737747bc33a72e31ae16fbb89a2c759602e8bb5ef0f6f61bf4e33b3060c7a0b65a1f6d46f01db5657528e15dadf9c134
+  languageName: node
+  linkType: hard
+
 "@ai-sdk/provider-utils@npm:2.2.8":
   version: 2.2.8
   resolution: "@ai-sdk/provider-utils@npm:2.2.8"
@@ -67,6 +91,19 @@ __metadata:
   peerDependencies:
     zod: ^3.23.8
   checksum: 10c0/de0a10f9e16010126a21a1690aaf56d545b9c0f8d8b2cc33ffd22c2bb2e914949acb9b3f86e0e39a0e4b0d4f24db12e2b094045e34b311de0c8f84bfab48cc92
+  languageName: node
+  linkType: hard
+
+"@ai-sdk/xai@npm:^1.2.18":
+  version: 1.2.18
+  resolution: "@ai-sdk/xai@npm:1.2.18"
+  dependencies:
+    "@ai-sdk/openai-compatible": "npm:0.2.16"
+    "@ai-sdk/provider": "npm:1.1.3"
+    "@ai-sdk/provider-utils": "npm:2.2.8"
+  peerDependencies:
+    zod: ^3.0.0
+  checksum: 10c0/caf92d750e4e0aecd598d3ebe2fdf4da56e2113d81d11bc4a965412e78186552ed7175f68f3f5584c27ba2b8f74e5d9f31c553d47a6989cbfacbdb2ceef1a332
   languageName: node
   linkType: hard
 
@@ -1690,6 +1727,8 @@ __metadata:
   resolution: "chat-app@workspace:."
   dependencies:
     "@ai-sdk/google": "npm:^1.2.19"
+    "@ai-sdk/openai": "npm:^1.3.23"
+    "@ai-sdk/xai": "npm:^1.2.18"
     "@eslint/eslintrc": "npm:^3"
     "@radix-ui/react-slot": "npm:^1.2.3"
     "@tailwindcss/postcss": "npm:^4"
