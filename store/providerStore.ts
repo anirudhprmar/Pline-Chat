@@ -2,7 +2,7 @@
 
 import { PROVIDERS } from '@/lib/providers/config'
 import {create} from 'zustand'
-import {persist} from 'zustand'
+import {persist} from 'zustand/middleware'
 
 interface ApiKey{
     providerId:string,
@@ -24,9 +24,9 @@ interface ProviderStore {
   removeApiKey: (providerId: string) => void;
 }
 
-export const useProviderStore = create<ProviderStore>(
+export const useProviderStore = create<ProviderStore>()(
     persist(
-        (set: (arg0: { selectedProvider?: string; selectedModel?: string; apiKeys?: any }) => void,get: () => { apiKeys: any })=>({
+        (set,get)=>({
             selectedProvider:'google',
 
             selectedModel:'gemini-2.0-flash-lite',

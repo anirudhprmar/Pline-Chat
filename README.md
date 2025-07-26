@@ -2,8 +2,8 @@
 
 ## TODO
 
-- [X] Unified AI Client (list of all the providers with specific function for operating)
-- [ ] Setting's page
+- [X] Setting's page
+- [ ] make the setting page pop out first to get the api key and provider and then let the user access the chat interface
 - [ ] Update the api/chat route, to use selected provider
 
 
