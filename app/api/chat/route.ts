@@ -1,29 +1,52 @@
-import {
-  createGoogleGenerativeAI,
-  GoogleGenerativeAIProviderOptions,
-} from '@ai-sdk/google';
+import { createGoogleGenerativeAI } from '@ai-sdk/google';
+import { createOpenAI } from '@ai-sdk/openai';
+import { createXai } from '@ai-sdk/xai';
 import { streamText, smoothStream } from 'ai';
 import { NextRequest } from 'next/server';
 
 export const maxDuration = 30;
 
-const google = createGoogleGenerativeAI({
-  apiKey: process.env.GOOGLE_API_KEY,
-});
+
 
 export async function POST(req: NextRequest) {
-  const { messages } = await req.json();
+  const { messages,provider,model,apiKey } = await req.json();
+
+  if (!apiKey) {
+    return new Response('API Key is required',{status:400})
+  }
+  
+
+  let aiProvider;
+
+  switch (provider) {
+
+      case 'xai':
+          aiProvider = createXai({apiKey})
+          break;
+
+      case 'openai':
+          aiProvider =  createOpenAI({apiKey})
+          break;
+      
+      case 'google':
+          aiProvider = createGoogleGenerativeAI({apiKey})
+          break;
+
+      default:
+        return new Response('Unsupported provider', { status: 400 });
+
+    }
 
   const result = streamText({
-    model: google('gemini-1.5-flash-8b'),
+    model: aiProvider(model),
     system: 'You are a helpful assistant. You are the kindest and most helpful assistant in the world. You always answer questions in a friendly and informative manner. You are really good at explaining things clearly and simply. You are also very patient and understanding.You think for the solution very carefully before answering.',
     messages,
-    experimental_transform: [smoothStream({ chunking: 'word' })],
-    providerOptions: {
-      thinkingConfig: {
-        thinkingBudget: 0,
-      },
-    } satisfies GoogleGenerativeAIProviderOptions,
+    // experimental_transform: [smoothStream({ chunking: 'word' })],
+    // providerOptions: {
+    //   thinkingConfig: {
+    //     thinkingBudget: 0,
+    //   },
+    // },
     onError({ error }) {
    console.error(error); // your error logging logic here
    },

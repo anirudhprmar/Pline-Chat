@@ -26,7 +26,7 @@ export const PROVIDERS: ProviderConfig[] = [
     id: 'google',
     name: 'google',
     displayName: 'Google',
-    models: ['gemini-2.0-flash-lite', 'Gemini 2.0 Flash'],
+    models: ['gemini-2.0-flash-lite', 'Gemini 2.0 Flash','gemini-1.5-flash-8b'],
     apiKeyLabel: 'Google API Key',
     apiKeyPlaceholder: 'sk-ant-...',
     requiresApiKey: true,

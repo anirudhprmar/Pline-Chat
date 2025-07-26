@@ -6,6 +6,7 @@ import { UIMessage } from "ai";
 import {getChatById, saveMessage} from "../frontend/dexie/queries";
 import { useChat } from "@ai-sdk/react";
 import { useLiveQuery } from "dexie-react-hooks";
+import { useProviderStore } from "@/store/providerStore";
 
 interface chatProps {
   chatId:string
@@ -14,9 +15,17 @@ interface chatProps {
 
 export default function Chat({chatId,initialMessages}: chatProps) {
 
+    const { selectedProvider, selectedModel, getApiKey } = useProviderStore();
+
+
   const {messages, setMessages, input, setInput, append, reload, status, stop } = useChat({
     id:chatId,
     api:'/api/chat',
+    body:{
+      provider:selectedProvider,
+      model:selectedModel,
+      apiKey:getApiKey(selectedProvider)
+    },
     initialMessages,
     experimental_throttle:50,
     onFinish: async ({parts}) =>{
