@@ -15,9 +15,9 @@ function Sidebar() {
   const navigate = useNavigate()
   return (
     <div>
-      <div>
+      {/* <div>
           <h1 className="text-2xl font-bold text-gray-950 dark:text-white">Chat</h1> 
-      </div>
+      </div> */}
       <div className="overflow-y-hidden">
         { chats?.map(chat => {
               return (
@@ -34,17 +34,17 @@ function Sidebar() {
           }
       </div>
       
-      <div className="rounded-full border border-gray-50 w-fit p-1">
+      <div className="rounded-full border border-gray-50 w-fit p-1 absolute bottom-16 left-2">
         <ThemeSwitch/>
       </div>
       <div >
         {/* button click -> modal open  */}
-       <button onClick={()=>setSettingOpen(!settingOpen)}>
+       {/* <button onClick={()=>setSettingOpen(!settingOpen)}>
           <SettingsIcon/>
        </button>
         {settingOpen && <div className="bg-gray-700 rounded-2xl">
         <Settings/>
-          </div>}
+          </div>} */}
       </div>
     </div>
   )

@@ -19,7 +19,8 @@ function ProviderSelector() {
             <select
             value={selectedProvider}
             onChange={(e)=>setProvider(e.target.value)}
-            className="w-full p-2 border rounded-md"
+            className="w-full p-2 border rounded-md bg-gray-900"
+            required
             >
                 {PROVIDERS.map(provider =>(
                     <option key={provider.id} value={provider.id}>
@@ -38,7 +39,8 @@ function ProviderSelector() {
                 </label>
                 <select value={selectedModel}
                 onChange={(e)=>setModel(e.target.value)}
-                className="w-full p-2 border rounded-md"
+                className="w-full p-2 border rounded-md bg-gray-900"
+                required
                 >
                     {currentProvider.models.map(m => (
                         <option key={m} value={m}>

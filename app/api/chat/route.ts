@@ -10,12 +10,13 @@ export const maxDuration = 30;
 
 export async function POST(req: NextRequest) {
   const { messages,provider,model,apiKey } = await req.json();
+  
 
   if (!apiKey) {
     return new Response('API Key is required',{status:400})
   }
   
-
+console.log("Received apiKey:", apiKey); // Add this line
   let aiProvider;
 
   switch (provider) {
@@ -41,7 +42,7 @@ export async function POST(req: NextRequest) {
     model: aiProvider(model),
     system: 'You are a helpful assistant. You are the kindest and most helpful assistant in the world. You always answer questions in a friendly and informative manner. You are really good at explaining things clearly and simply. You are also very patient and understanding.You think for the solution very carefully before answering.',
     messages,
-    // experimental_transform: [smoothStream({ chunking: 'word' })],
+    experimental_transform: [smoothStream({ chunking: 'word' })],
     // providerOptions: {
     //   thinkingConfig: {
     //     thinkingBudget: 0,
