@@ -13,8 +13,8 @@ export default function Home() {
   }
 
   return (
-   <div className="flex flex-col items-center justify-center h-full">
-      <h1 className="text-3xl font-bold mb-6">AI Chat Assistant</h1>
+   <div className="flex flex-col items-center justify-center min-h-screen  ">
+      <h1 className="text-3xl font-bold mb-6">Pline Chat</h1>
       <p className="text-muted-foreground text-center max-w-md mb-8">
         Start a conversation with the AI assistant. Ask questions, get information, or just chat!
       </p>
