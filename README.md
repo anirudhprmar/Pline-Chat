@@ -34,7 +34,7 @@ Pline Chat is a modern, privacy-first AI chat application that empowers you to i
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/anirudhprmar/Pline-Chat.git
-   cd pline-chat
+   cd Pline-Chat
    ```
 
 2. **Install dependencies:**
